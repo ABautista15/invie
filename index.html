@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Invie - tus mejores guitarras!!</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Allerta" rel="stylesheet">
@@ -14,10 +15,11 @@
         <header id="header" class="header contenedor"> <!-- header -->
         
             <figure class="logotipo"> <!--logotipo-->
-                <img src="images/invie.png" alt="Invie Logotipo" width="186" height="60">
+                <img src="images/invie.png" srcset="images/invie.png 1x, images/invie2x.png 2x" alt="Invie Logotipo" width="186" height="60">
             </figure>
+            <span id="burger-button" class="burger-button icon-menu"></span>
             <!--menu-->
-            <nav class="menu">
+            <nav class="menu" id="menu">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="precios.html">Precios</a></li>
@@ -35,8 +37,12 @@
     <section id="guitarras" class="contenedor guitarras"><!-- guitarras -->
         
         <h2>Nuestras guitarras</h2>
+        <div class="video-responsive-contenedor">
+            <iframe class="video-responsive-src" width="560" height="315" src="https://www.youtube.com/embed/R1dW8M4EqYY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        
         <article class="guitarra"><!--Guitarra 1-->
-            <img class="right" src="images/invie-acustica.png" alt="Guitarra Invie Acustica" width="350">
+            <img class="right" data-src="images/invie-acustica.png|images/invie-acustica2x.png" alt="Guitarra Invie Acustica" width="350">
             <div class="contenedor-guitarra-a">
                 <h3 class="title-b">Invie Acustica</h3>
                 <ol>
@@ -47,7 +53,7 @@
             </div>
         </article>
         <article class="guitarra b"><!--Guitarra 2-->
-            <img class="left" src="images/invie-classic.png" alt="Guitarra Invie Classic" width="350">
+            <img class="left" data-src="images/invie-classic.png|images/invie-classic2x.png" alt="Guitarra Invie Classic" width="350">
             <div class="contenedor-guitarra-b">
                 <h3 class="title-b">Invie Classic</h3>
                 <ol>
@@ -62,7 +68,7 @@
     <footer class="footer">
         <div class="contenedor">
             <div class="contacto">
-                <img src="images/invie-white.png" alt="Logotipo Blanco">
+                <img data-src="images/invie-white.png|images/invie-white2x.png" alt="Logotipo Blanco">
                 <a href="tel:+529982934969"><strong>Telefono</strong><span>9982934969</span></a>
                 <a href="mailto:contacto@invie.com"><strong>Email</strong><span>contacto@invie.com</span></a>
                 
@@ -109,5 +115,36 @@
         </div>
         
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blazy/1.8.2/blazy.min.js"></script>
+    <script>
+        var $burgerButton = document.getElementById('burger-button');
+        var $menu = document.getElementById('menu');
+        var mediaQuerie = window.matchMedia('(max-width: 500px)');
+        mediaQuerie.addListener(media);
+        function toggleMenu(){
+            $menu.classList.toggle('active');
+            $burgerButton.classList.toggle('icon-close');
+        }
+        function showMenu(){
+            $menu.classList.toggle('active');
+            $burgerButton.classList.add('icon-close');
+        }
+        function hideMenu(){
+            $menu.classList.toggle('active');
+            $burgerButton.classList.remove('icon-close');
+        }
+        function media(){
+            if(mediaQuerie.matches){
+                $burgerButton.addEventListener('click',toggleMenu);
+                
+            }else{
+                $burgerButton.removeEventListener('click',toggleMenu);
+            }
+        }
+        media();
+        var bLazy = new Blazy({
+            selector : 'img'
+        });
+    </script>
 </body>
 </html>

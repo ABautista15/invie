@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Precios de tus mejores</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Allerta" rel="stylesheet">
@@ -13,8 +14,9 @@
             <figure class="logotipo"> <!--logotipo-->
                 <img src="images/invie.png" alt="Invie Logotipo" width="186" height="60">
             </figure>
-            <!--menu-->
-            <nav class="menu">
+            <span id="burger-button" class="burger-button icon-menu"></span>
+            
+            <nav id="menu" class="menu">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="precios.html">Precios</a></li>
@@ -106,5 +108,26 @@
         </div>
         
     </footer>
+
+    <script>
+        var $burgerButton = document.getElementById('burger-button');
+        var $menu = document.getElementById('menu');
+        var mediaQuerie = window.matchMedia('(max-width: 500px)');
+        mediaQuerie.addListener(media);
+        function toggleMenu(){
+            $menu.classList.toggle('active');
+            $burgerButton.classList.toggle('icon-close');
+        }
+        function media(){
+            if(mediaQuerie.matches){
+                $burgerButton.addEventListener('click',toggleMenu);
+                
+            }else{
+                $burgerButton.removeEventListener('click',toggleMenu);
+            }
+        }
+        media();
+        
+    </script>
 </body>
 </html>
